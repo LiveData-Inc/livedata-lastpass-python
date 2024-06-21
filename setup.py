@@ -12,14 +12,14 @@ def get_version():
 
 
 setup(
-    name='lastpass-python',
+    name='livedata-lastpass-python',
     version=get_version(),
     description='Read only access to the online LastPass vault (unofficial)',
     long_description=open('README.rst').read(),
     license='MIT',
     author='konomae',
     author_email='konomae@users.noreply.github.com',
-    url='https://github.com/konomae/lastpass-python',
+    url='https://github.com/LiveData-Inc/livedata-lastpass-python',
     packages=['lastpass'],
     install_requires=[
         "requests>=1.2.1,<=3.0.0",

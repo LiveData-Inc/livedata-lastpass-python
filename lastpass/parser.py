@@ -1,18 +1,17 @@
 # coding: utf-8
-from base64 import b64decode
 import binascii
 import codecs
-from io import BytesIO
-import struct
 import re
+import struct
+from base64 import b64decode
+from io import BytesIO
 
 from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Util import number
 from Crypto.PublicKey import RSA
+from Crypto.Util import number
 
 from .account import Account
 from .chunk import Chunk
-
 
 # Secure note types that contain account-like information
 ALLOWED_SECURE_NOTE_TYPES = [
@@ -50,7 +49,11 @@ def parse_ACCT(chunk, encryption_key):
     id = read_item(io)
     name = decode_aes256_plain_auto(read_item(io), encryption_key)
     group = decode_aes256_plain_auto(read_item(io), encryption_key)
-    url = decode_hex(read_item(io))
+    try:
+        data = read_item(io)
+        url = decode_hex(data)
+    except TypeError:
+        url = decode_aes256_plain_auto(data, encryption_key)
     notes = decode_aes256_plain_auto(read_item(io), encryption_key)
     skip_item(io, 2)
     username = decode_aes256_plain_auto(read_item(io), encryption_key)

@@ -2,25 +2,19 @@
 import hashlib
 from base64 import b64decode
 from binascii import hexlify
-import requests
 from xml.etree import ElementTree as etree
-from . import blob
-from .version import __version__
-from .exceptions import (
-    NetworkError,
-    InvalidResponseError,
-    UnknownResponseSchemaError,
-    LastPassUnknownUsernameError,
-    LastPassInvalidPasswordError,
-    LastPassIncorrectGoogleAuthenticatorCodeError,
-    LastPassIncorrectYubikeyPasswordError,
-    LastPassUnknownError
-)
-from .session import Session
 
+import requests
+
+from . import blob
+from .exceptions import (InvalidResponseError, LastPassIncorrectGoogleAuthenticatorCodeError,
+                         LastPassIncorrectYubikeyPasswordError, LastPassInvalidPasswordError, LastPassUnknownError,
+                         LastPassUnknownUsernameError, NetworkError, UnknownResponseSchemaError)
+from .session import Session
+from .version import __version__
 
 http = requests
-headers = {'user-agent': 'lastpass-python/{}'.format(__version__)}
+headers = {'user-agent': 'livedata-lastpass-python/{}'.format(__version__)}
 
 
 def login(username, password, multifactor_password=None, client_id=None):
